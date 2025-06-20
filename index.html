@@ -1,0 +1,114 @@
+function convertTemperature() {
+  const tempInput = document.getElementById("temperature").value;
+  const unit = document.querySelector('input[name="unit"]:checked').value;
+  const resultDiv = document.getElementById("result");
+
+  if (tempInput === "" || isNaN(tempInput)) {
+    resultDiv.textContent = "Please enter a valid number.";
+    return;
+  }
+
+  const temp = parseFloat(tempInput);
+  let resultText = "";
+
+  switch(unit) {
+    case "celsius":
+      resultText = `
+        Fahrenheit: ${(temp * 9/5 + 32).toFixed(2)} °F<br>
+        Kelvin: ${(temp + 273.15).toFixed(2)} K`;
+      break;
+    case "fahrenheit":
+      resultText = `
+        Celsius: ${((temp - 32) * 5/9).toFixed(2)} °C<br>
+        Kelvin: ${(((temp - 32) * 5/9) + 273.15).toFixed(2)} K`;
+      break;
+    case "kelvin":
+      resultText = `
+        Celsius: ${(temp - 273.15).toFixed(2)} °C<br>
+        Fahrenheit: ${((temp - 273.15) * 9/5 + 32).toFixed(2)} °F`;
+      break;
+  }
+
+  resultDiv.innerHTML = resultText;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  color: #555;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+function convert() {
+  const input = parseFloat(document.getElementById("temperature").value);
+  const unit = document.getElementById("unit").value;
+  const resultField = document.getElementById("result");
+
+  if (isNaN(input)) {
+    resultField.value = "Enter a valid number";
+    return;
+  }
+
+  let result = "";
+  switch (unit) {
+    case "fahrenheit":
+      result = ((input - 32) * 5 / 9).toFixed(4) + " °C";
+      break;
+    case "celsius":
+      result = ((input * 9 / 5) + 32).toFixed(4) + " °F";
+      break;
+    case "kelvin":
+      result = (input - 273.15).toFixed(4) + " °C";
+      break;
+  }
+
+  resultField.value = result;
+}
